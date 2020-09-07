@@ -454,11 +454,21 @@ function getCommonDirectoryPath(pathes) {
  *                         [ 6 ]]
  *
  */
-function getMatrixProduct(/* m1, m2 */) {
-  throw new Error('Not implemented');
+function getMatrixProduct(m1, m2) {
+  let out = [];
+  for (let i = 0; i < m1.length; i++) {
+    out[i] = [];
+    for (let j = 0; j < m2[i].length; j++) {
+      out[i][j] = 0;
+      for (let k = 0; k < m1[i].length; k++) {
+        out[i][j] = out[i][j] + m1[i][k] * m2[k][j];
+      }
+    }
+  }
+  return out;
 }
 
-
+//TODO
 /**
  * Returns the evaluation of the specified tic-tac-toe position.
  * See the details: https://en.wikipedia.org/wiki/Tic-tac-toe
@@ -489,8 +499,31 @@ function getMatrixProduct(/* m1, m2 */) {
  *    [    ,   ,    ]]
  *
  */
-function evaluateTicTacToePosition(/* position */) {
-  throw new Error('Not implemented');
+function evaluateTicTacToePosition(position) {
+  // strings
+  for (let i = 0; i < position.length; i++) {
+    for (let j = 0; j < position[i].length - 2; j++) {
+      if (position[i][j] !== undefined && (position[i][j] === position[i][j + 1]) && (position[i][j + 1] === position[i][j + 2])) {
+        return position[i][j];
+      }
+    }
+  }
+  //columns
+  for (let i = 0; i < position[0].length; i++) {
+    for (let j = 0; j < position.length - 2; j++) {
+      if (position[j][i] !== undefined && (position[j][i] === position[j + 1][i]) && (position[j + 1][i] === position[j + 2][i])) {
+        return position[j][i];
+      }
+    }
+  }
+  // diagonals
+  if (position[0][0] !== undefined && position[0][0] === position[1][1] && position[1][1] === position[2][2]) {
+    return position[0][0];
+  }
+  if (position[0][2] !== undefined && position[0][2] === position[1][1] && position[1][1] === position[2][0]) {
+    return position[0][2];
+  }
+  return undefined;
 }
 
 

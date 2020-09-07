@@ -84,7 +84,6 @@ function getFastestPromise(array) {
 }
 
 
-//TODO
 /**
  * Return Promise object that should be resolved with value that is
  * a result of action with values of all the promises that exists in array.
@@ -103,7 +102,21 @@ function getFastestPromise(array) {
  *
  */
 function chainPromises(array, action) {
-  throw new Error('Not implemented');
+  let out = [];
+  return new Promise((res) => {
+    array.forEach(el => {
+      el
+        .then(res => {
+          out = [...out, res];
+        })
+        .then(() => {
+          res(out.reduce(action));
+        })
+        .catch(() => {
+          res(out.reduce(action));
+        });
+    });
+  });
 }
 
 module.exports = {

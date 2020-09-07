@@ -56,13 +56,12 @@ function parseDataFromIso8601(value) {
 function isLeapYear(date) {
   if (new Date(date).getFullYear() % 4 !== 0) {
     return false;
-  } else if (new Date(date).getFullYear() % 100 !== 0) {
+  } if (new Date(date).getFullYear() % 100 !== 0) {
     return true;
-  } else if (new Date(date).getFullYear() % 400 !== 0) {
+  } if (new Date(date).getFullYear() % 400 !== 0) {
     return false;
-  } else {
-    return true;
   }
+  return true;
 }
 
 

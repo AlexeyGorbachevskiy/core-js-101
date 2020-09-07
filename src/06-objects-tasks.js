@@ -58,7 +58,7 @@ function fromJSON(proto, json) {
   return obj;
 }
 
-//TODO
+// TODO
 /**
  * Css selectors builder
  *

@@ -24,7 +24,7 @@
  *
  */
 function getComposition(f, g) {
-  return x => f(g(x));
+  return (x) => f(g(x));
 }
 
 
@@ -45,7 +45,7 @@ function getComposition(f, g) {
  *
  */
 function getPowerFunction(exponent) {
-  return x => x ** exponent;
+  return (x) => x ** exponent;
 }
 
 
@@ -63,14 +63,13 @@ function getPowerFunction(exponent) {
  *   getPolynom()      => null
  */
 function getPolynom() {
-
   return (x) => [...arguments].reverse()
     .reduce(
       (acc, curr, ind) => acc + curr * (x ** ind),
     );
 }
 
-//TODO
+// TODO
 /**
  * Memoizes passed function and returns function
  * which invoked first time calls the passed function and then always returns cached result.
@@ -89,7 +88,7 @@ function memoize(/* func */) {
   throw new Error('Not implemented');
 }
 
-//TODO
+// TODO
 /**
  * Returns the function trying to call the passed function and if it throws,
  * retrying it specified number of attempts.
@@ -109,7 +108,7 @@ function retry(/* func, attempts */) {
   throw new Error('Not implemented');
 }
 
-//TODO
+// TODO
 /**
  * Returns the logging wrapper for the specified method,
  * Logger has to log the start and end of calling the specified function.
@@ -174,9 +173,7 @@ function partialUsingArguments(fn, ...args1) {
  *   getId10() => 11
  */
 function getIdGeneratorFunction(startFrom) {
-  return () => {
-    return startFrom++;
-  };
+  return () => startFrom++;
 }
 
 

@@ -30,13 +30,12 @@
 function getFizzBuzz(num) {
   if (num % 3 === 0 && num % 5 === 0) {
     return 'FizzBuzz';
-  } else if (num % 3 === 0) {
+  } if (num % 3 === 0) {
     return 'Fizz';
-  } else if (num % 5 === 0) {
+  } if (num % 5 === 0) {
     return 'Buzz';
-  } else {
-    return num;
   }
+  return num;
 }
 
 
@@ -54,7 +53,7 @@ function getFizzBuzz(num) {
 function getFactorial(n) {
   let out = 1;
   for (let i = 1; i <= n; i++) {
-    out = out * i;
+    out *= i;
   }
   return out;
 }
@@ -188,7 +187,6 @@ function findFirstSingleChar(str) {
         ind = i;
         str.splice(j, 1);
         j--;
-
       }
     }
     if (ind !== null) {
@@ -228,10 +226,8 @@ function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
   let end;
   isStartIncluded ? start = '[' : start = '(';
   isEndIncluded ? end = ']' : end = ')';
-  let arr = [a, b].sort((a, b) => {
-    return a - b;
-  });
-  return start + arr[0] + ', ' + arr[1] + end;
+  const arr = [a, b].sort((a, b) => a - b);
+  return `${start + arr[0]}, ${arr[1]}${end}`;
 }
 
 
@@ -310,7 +306,6 @@ function isCreditCardNumber(ccn) {
     sum += digit;
   }
   return (sum % 10) === 0;
-
 }
 
 /**
@@ -328,11 +323,11 @@ function isCreditCardNumber(ccn) {
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
 function getDigitalRoot(num) {
-  let arr = num.toString()
+  const arr = num.toString()
     .split('');
   num = 0;
   for (let i = 0; i <= arr.length - 1; i += 1) {
-    num = num + Number(arr[i]);
+    num += Number(arr[i]);
   }
   if (num > 9) {
     return getDigitalRoot(num);
@@ -368,13 +363,13 @@ function isBracketsBalanced(str) {
     return false;
   }
 
-  let out = str.split('');
+  const out = str.split('');
   for (let i = 0; i < out.length; i++) {
     if (
-      (out[i] === '[' && out[i + 1] === ']') ||
-      (out[i] === '(' && out[i + 1] === ')') ||
-      (out[i] === '{' && out[i + 1] === '}') ||
-      (out[i] === '<' && out[i + 1] === '>')) {
+      (out[i] === '[' && out[i + 1] === ']')
+      || (out[i] === '(' && out[i + 1] === ')')
+      || (out[i] === '{' && out[i + 1] === '}')
+      || (out[i] === '<' && out[i + 1] === '>')) {
       out.splice(i, 2);
       i -= 2;
     }
@@ -455,7 +450,7 @@ function getCommonDirectoryPath(pathes) {
  *
  */
 function getMatrixProduct(m1, m2) {
-  let out = [];
+  const out = [];
   for (let i = 0; i < m1.length; i++) {
     out[i] = [];
     for (let j = 0; j < m2[i].length; j++) {
@@ -468,7 +463,7 @@ function getMatrixProduct(m1, m2) {
   return out;
 }
 
-//TODO
+// TODO
 /**
  * Returns the evaluation of the specified tic-tac-toe position.
  * See the details: https://en.wikipedia.org/wiki/Tic-tac-toe
@@ -508,7 +503,7 @@ function evaluateTicTacToePosition(position) {
       }
     }
   }
-  //columns
+  // columns
   for (let i = 0; i < position[0].length; i++) {
     for (let j = 0; j < position.length - 2; j++) {
       if (position[j][i] !== undefined && (position[j][i] === position[j + 1][i]) && (position[j + 1][i] === position[j + 2][i])) {

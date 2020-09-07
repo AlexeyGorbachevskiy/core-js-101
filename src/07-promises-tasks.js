@@ -106,6 +106,7 @@ function chainPromises(array, action) {
   return new Promise((res) => {
     array.forEach((el) => {
       el
+        // eslint-disable-next-line no-shadow
         .then((res) => {
           out = [...out, res];
         })

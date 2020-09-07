@@ -63,6 +63,7 @@ function getPowerFunction(exponent) {
  *   getPolynom()      => null
  */
 function getPolynom() {
+  // eslint-disable-next-line prefer-rest-params
   return (x) => [...arguments].reverse()
     .reduce(
       (acc, curr, ind) => acc + curr * (x ** ind),
@@ -173,6 +174,7 @@ function partialUsingArguments(fn, ...args1) {
  *   getId10() => 11
  */
 function getIdGeneratorFunction(startFrom) {
+  // eslint-disable-next-line no-param-reassign,no-plusplus
   return () => startFrom++;
 }
 

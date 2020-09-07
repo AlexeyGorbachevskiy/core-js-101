@@ -265,6 +265,7 @@ function toArrayOfSquares(arr) {
 
 function getMovingSum(arr) {
   let out = [];
+  // eslint-disable-next-line no-shadow
   out = arr.map((el, index, arr) => el + arr.reduce((acc, curr, i) => {
     if (i < index) {
       return acc + curr;
@@ -452,6 +453,7 @@ function getFalsyValuesCount(arr) {
   return arr.filter((val) => (val === 0 || val === '' || val === false || val === undefined || val === null || Number.isNaN(val))).length;
   // let count = 0;
   // for (let val of arr) {
+  // eslint-disable-next-line max-len
   //   if (val === 0 || val === '' || val === false || val === undefined || val === null || Number.isNaN(val)) {
   //     count += 1;
   //   }
@@ -528,6 +530,7 @@ function toStringList(arr) {
  *    ]
  */
 function sortCitiesArray(arr) {
+  // eslint-disable-next-line array-callback-return,consistent-return
   return arr.sort((a, b) => {
     if (a.country > b.country) {
       return 1;
@@ -613,9 +616,11 @@ function getIntervalArray(start, end) {
     .map((el, i, arr) => {
       if (i === 0) {
         return start;
-      } if (i === arr.length - 1) {
+      }
+      if (i === arr.length - 1) {
         return end;
       }
+      // eslint-disable-next-line no-plusplus
       return ++out;
     });
   // let out = [];
@@ -675,6 +680,7 @@ function distinct(arr) {
 function group(array, keySelector, valueSelector) {
   const out = new Map();
 
+  // eslint-disable-next-line array-callback-return
   array.map((el) => {
     const key = keySelector(el);
     const value = valueSelector(el);

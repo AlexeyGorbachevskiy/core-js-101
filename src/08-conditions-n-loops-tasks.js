@@ -52,6 +52,7 @@ function getFizzBuzz(num) {
  */
 function getFactorial(n) {
   let out = 1;
+  // eslint-disable-next-line no-plusplus
   for (let i = 1; i <= n; i++) {
     out *= i;
   }
@@ -73,6 +74,7 @@ function getFactorial(n) {
  */
 function getSumBetweenNumbers(n1, n2) {
   let sum = 0;
+  // eslint-disable-next-line no-plusplus
   for (let i = n1; i <= n2; i++) {
     sum += i;
   }
@@ -179,19 +181,24 @@ function isInsideCircle(circle, point) {
  *   'entente' => null
  */
 function findFirstSingleChar(str) {
+  // eslint-disable-next-line no-param-reassign
   str = str.split('');
   let ind = null;
+  // eslint-disable-next-line no-plusplus
   for (let i = 0; i < str.length; i++) {
+    // eslint-disable-next-line no-plusplus
     for (let j = i + 1; j < str.length; j++) {
       if (str[i] === str[j]) {
         ind = i;
         str.splice(j, 1);
+        // eslint-disable-next-line no-plusplus
         j--;
       }
     }
     if (ind !== null) {
       str.splice(i, 1);
       ind = null;
+      // eslint-disable-next-line no-plusplus
       i--;
     }
   }
@@ -224,8 +231,11 @@ function findFirstSingleChar(str) {
 function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
   let start;
   let end;
+  // eslint-disable-next-line no-unused-expressions
   isStartIncluded ? start = '[' : start = '(';
+  // eslint-disable-next-line no-unused-expressions
   isEndIncluded ? end = ']' : end = ')';
+  // eslint-disable-next-line no-shadow
   const arr = [a, b].sort((a, b) => a - b);
   return `${start + arr[0]}, ${arr[1]}${end}`;
 }
@@ -291,6 +301,7 @@ function reverseInteger(num) {
  *   4916123456789012 => false
  */
 function isCreditCardNumber(ccn) {
+  // eslint-disable-next-line no-param-reassign
   ccn = ccn.toString();
   let sum = Number(ccn[ccn.length - 1]);
   const digitCount = ccn.length;
@@ -325,8 +336,10 @@ function isCreditCardNumber(ccn) {
 function getDigitalRoot(num) {
   const arr = num.toString()
     .split('');
+  // eslint-disable-next-line no-param-reassign
   num = 0;
   for (let i = 0; i <= arr.length - 1; i += 1) {
+    // eslint-disable-next-line no-param-reassign
     num += Number(arr[i]);
   }
   if (num > 9) {
@@ -364,6 +377,7 @@ function isBracketsBalanced(str) {
   }
 
   const out = str.split('');
+  // eslint-disable-next-line no-plusplus
   for (let i = 0; i < out.length; i++) {
     if (
       (out[i] === '[' && out[i + 1] === ']')
@@ -418,7 +432,9 @@ function toNaryString(num, n) {
  */
 function getCommonDirectoryPath(pathes) {
   let out = pathes[0];
+  // eslint-disable-next-line no-plusplus
   for (let i = 1; i < pathes.length; i++) {
+    // eslint-disable-next-line no-plusplus
     for (let j = 0; j < pathes[i].length; j++) {
       if (out[j] !== pathes[i][j]) {
         out = pathes[i].slice(0, j);
@@ -451,11 +467,15 @@ function getCommonDirectoryPath(pathes) {
  */
 function getMatrixProduct(m1, m2) {
   const out = [];
+  // eslint-disable-next-line no-plusplus
   for (let i = 0; i < m1.length; i++) {
     out[i] = [];
+    // eslint-disable-next-line no-plusplus
     for (let j = 0; j < m2[i].length; j++) {
       out[i][j] = 0;
+      // eslint-disable-next-line no-plusplus
       for (let k = 0; k < m1[i].length; k++) {
+        // eslint-disable-next-line operator-assignment
         out[i][j] = out[i][j] + m1[i][k] * m2[k][j];
       }
     }
@@ -496,25 +516,33 @@ function getMatrixProduct(m1, m2) {
  */
 function evaluateTicTacToePosition(position) {
   // strings
+  // eslint-disable-next-line no-plusplus
   for (let i = 0; i < position.length; i++) {
+    // eslint-disable-next-line no-plusplus
     for (let j = 0; j < position[i].length - 2; j++) {
+      // eslint-disable-next-line max-len
       if (position[i][j] !== undefined && (position[i][j] === position[i][j + 1]) && (position[i][j + 1] === position[i][j + 2])) {
         return position[i][j];
       }
     }
   }
   // columns
+  // eslint-disable-next-line no-plusplus
   for (let i = 0; i < position[0].length; i++) {
+    // eslint-disable-next-line no-plusplus
     for (let j = 0; j < position.length - 2; j++) {
+      // eslint-disable-next-line max-len
       if (position[j][i] !== undefined && (position[j][i] === position[j + 1][i]) && (position[j + 1][i] === position[j + 2][i])) {
         return position[j][i];
       }
     }
   }
   // diagonals
+  // eslint-disable-next-line max-len
   if (position[0][0] !== undefined && position[0][0] === position[1][1] && position[1][1] === position[2][2]) {
     return position[0][0];
   }
+  // eslint-disable-next-line max-len
   if (position[0][2] !== undefined && position[0][2] === position[1][1] && position[1][1] === position[2][0]) {
     return position[0][2];
   }

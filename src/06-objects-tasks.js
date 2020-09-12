@@ -114,32 +114,77 @@ function fromJSON(proto, json) {
  */
 
 const cssSelectorBuilder = {
-  element(/* value */) {
-    throw new Error('Not implemented');
+  outputSelector: '',
+  stringify() {
+    return this.outputSelector;
+  },
+  rank(order) {
+    if (this.objectOrder === order && (order === 0 || order === 1 || order === 5)) {
+      throw new Error('Element, id and pseudo-element should not occur more then one time inside the selector');
+    }
+    if (this.objectOrder > order) {
+      throw new Error('Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element');
+    }
+  },
+  element(value) {
+    this.rank(0);
+    return {
+      ...cssSelectorBuilder,
+      outputSelector: `${this.outputSelector}${value}`,
+      objectOrder: 0,
+    };
   },
 
-  id(/* value */) {
-    throw new Error('Not implemented');
+  id(value) {
+    this.rank(1);
+    return {
+      ...cssSelectorBuilder,
+      outputSelector: `${this.outputSelector}#${value}`,
+      objectOrder: 1,
+    };
   },
 
-  class(/* value */) {
-    throw new Error('Not implemented');
+  class(value) {
+    this.rank(2);
+    return {
+      ...cssSelectorBuilder,
+      outputSelector: `${this.outputSelector}.${value}`,
+      objectOrder: 2,
+    };
   },
 
-  attr(/* value */) {
-    throw new Error('Not implemented');
+  attr(value) {
+    this.rank(3);
+    return {
+      ...cssSelectorBuilder,
+      outputSelector: `${this.outputSelector}[${value}]`,
+      objectOrder: 3,
+    };
   },
 
-  pseudoClass(/* value */) {
-    throw new Error('Not implemented');
+  pseudoClass(value) {
+    this.rank(4);
+    return {
+      ...cssSelectorBuilder,
+      outputSelector: `${this.outputSelector}:${value}`,
+      objectOrder: 4,
+    };
   },
 
-  pseudoElement(/* value */) {
-    throw new Error('Not implemented');
+  pseudoElement(value) {
+    this.rank(5);
+    return {
+      ...cssSelectorBuilder,
+      outputSelector: `${this.outputSelector}::${value}`,
+      objectOrder: 5,
+    };
   },
 
-  combine(/* selector1, combinator, selector2 */) {
-    throw new Error('Not implemented');
+  combine(selector1, combinator, selector2) {
+    return {
+      ...cssSelectorBuilder,
+      outputSelector: `${selector1.stringify()} ${combinator} ${selector2.stringify()}`,
+    };
   },
 };
 

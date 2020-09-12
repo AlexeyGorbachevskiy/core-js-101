@@ -70,7 +70,7 @@ function getPolynom() {
     );
 }
 
-// TODO
+
 /**
  * Memoizes passed function and returns function
  * which invoked first time calls the passed function and then always returns cached result.
@@ -85,11 +85,12 @@ function getPolynom() {
  *   ...
  *   memoizer() => the same random number  (next run, returns the previous cached result)
  */
-function memoize(/* func */) {
-  throw new Error('Not implemented');
+function memoize(func) {
+  const value = func();
+  return () => value;
 }
 
-// TODO
+
 /**
  * Returns the function trying to call the passed function and if it throws,
  * retrying it specified number of attempts.
@@ -105,11 +106,22 @@ function memoize(/* func */) {
  * }, 2);
  * retryer() => 2
  */
-function retry(/* func, attempts */) {
-  throw new Error('Not implemented');
+function retry(func, attempts) {
+  // eslint-disable-next-line consistent-return
+  return () => {
+    try {
+      // eslint-disable-next-line no-unused-vars
+      return func();
+    } catch (e) {
+      if (e instanceof Error) {
+        // eslint-disable-next-line no-param-reassign,no-plusplus
+        return retry(func, --attempts)();
+      }
+    }
+  };
 }
 
-// TODO
+
 /**
  * Returns the logging wrapper for the specified method,
  * Logger has to log the start and end of calling the specified function.
@@ -133,8 +145,15 @@ function retry(/* func, attempts */) {
  * cos(3.141592653589793) ends
  *
  */
-function logger(/* func, logFunc */) {
-  throw new Error('Not implemented');
+function logger(func, logFunc) {
+  return (...args) => {
+    logFunc(`${func.name}(${JSON.stringify(args)
+      .slice(1, -1)}) starts`);
+    const output = func(...args);
+    logFunc(`${func.name}(${JSON.stringify(args)
+      .slice(1, -1)}) ends`);
+    return output;
+  };
 }
 
 
